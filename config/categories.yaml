@@ -1,0 +1,102 @@
+# Article categorization keywords
+categories:
+  Machine Learning:
+    keywords:
+      - "machine learning"
+      - "ml model"
+      - "neural network"
+      - "deep learning"
+      - "training"
+      - "inference"
+      - "model deployment"
+      - "mlops"
+      - "feature engineering"
+      - "supervised learning"
+      - "unsupervised learning"
+      - "reinforcement learning"
+      
+  Natural Language Processing:
+    keywords:
+      - "nlp"
+      - "natural language"
+      - "language model"
+      - "llm"
+      - "gpt"
+      - "transformer"
+      - "bert"
+      - "text generation"
+      - "sentiment analysis"
+      - "named entity"
+      - "chatbot"
+      - "conversational ai"
+      
+  Computer Vision:
+    keywords:
+      - "computer vision"
+      - "image recognition"
+      - "object detection"
+      - "image classification"
+      - "video analysis"
+      - "convolutional"
+      - "cnn"
+      - "image processing"
+      - "visual"
+      
+  Data Engineering:
+    keywords:
+      - "data pipeline"
+      - "data engineering"
+      - "etl"
+      - "data warehouse"
+      - "data lake"
+      - "apache spark"
+      - "kafka"
+      - "airflow"
+      - "data infrastructure"
+      - "stream processing"
+      - "batch processing"
+      
+  Data Science:
+    keywords:
+      - "data science"
+      - "analytics"
+      - "data analysis"
+      - "statistical"
+      - "predictive model"
+      - "exploratory data"
+      - "visualization"
+      - "jupyter"
+      
+  AI Infrastructure:
+    keywords:
+      - "ai infrastructure"
+      - "gpu"
+      - "distributed training"
+      - "model serving"
+      - "kubernetes"
+      - "container"
+      - "scalability"
+      - "performance optimization"
+      - "cloud"
+      
+  Recommendation Systems:
+    keywords:
+      - "recommendation"
+      - "recommender"
+      - "personalization"
+      - "ranking"
+      - "collaborative filtering"
+      
+  Generative AI:
+    keywords:
+      - "generative"
+      - "gan"
+      - "diffusion"
+      - "stable diffusion"
+      - "dall-e"
+      - "midjourney"
+      - "text-to-image"
+      - "image generation"
+      
+  Other:
+    keywords: []  # Default category for uncategorized articles

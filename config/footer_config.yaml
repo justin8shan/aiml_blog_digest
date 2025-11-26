@@ -1,0 +1,20 @@
+# Email Footer Configuration
+footer:
+  author:
+    name: "Justin Shan"
+    email: "xinchao.shan@gmail.com"
+    
+  description: |
+    This is an automated weekly digest that aggregates and summarizes articles 
+    from leading tech companies' AI, Machine Learning, and Data Science blogs.
+    
+  disclaimer: |
+    All articles and content are property of their respective authors and companies. 
+    This digest provides links and summaries for informational purposes only. 
+    Please visit the original blog posts for the complete articles.
+    
+  contact_info: |
+    Questions or feedback? Contact Justin Shan at xinchao.shan@gmail.com
+    
+  unsubscribe_note: |
+    To unsubscribe or modify your email preferences, please contact the digest administrator.

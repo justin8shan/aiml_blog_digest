@@ -1,0 +1,19 @@
+# Email Configuration
+email:
+  # SMTP Server Configuration
+  smtp_server: "smtp.gmail.com"
+  smtp_port: 587
+  
+  # Sender email (set via environment variable SENDER_EMAIL)
+  # Password (set via environment variable EMAIL_PASSWORD)
+  
+  # Recipients
+  recipients:
+    - "xinchao.shan@gmail.com"
+    - "sherrysherry@gmail.com" 
+    
+  # Email Subject Template
+  subject_template: "Weekly AI/ML Tech Blog Digest - Week of {date}"
+  
+  # Email settings
+  use_html: true
