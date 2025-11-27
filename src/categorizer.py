@@ -40,16 +40,13 @@ class ArticleCategorizer:
             # Find matching categories
             matched_categories = []
             for category_name, category_info in self.categories.items():
-                if category_name == "Other":
-                    continue
-                    
                 keywords = category_info.get('keywords', [])
-                if self._matches_keywords(text, keywords):
+                if keywords and self._matches_keywords(text, keywords):
                     matched_categories.append(category_name)
             
-            # If no category matched, assign to "Other"
+            # If no category matched, assign to default category
             if not matched_categories:
-                matched_categories = ["Other"]
+                matched_categories = ["Software Engineering & Systems"]
             
             # Add article to all matched categories
             for category in matched_categories:

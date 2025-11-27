@@ -1,34 +1,16 @@
 # Article categorization keywords
+# Used for keyword-based categorization fallback
 categories:
-  Machine Learning:
+  Large Language Models (LLMs):
     keywords:
-      - "machine learning"
-      - "ml model"
-      - "neural network"
-      - "deep learning"
-      - "training"
-      - "inference"
-      - "model deployment"
-      - "mlops"
-      - "feature engineering"
-      - "supervised learning"
-      - "unsupervised learning"
-      - "reinforcement learning"
-      
-  Natural Language Processing:
-    keywords:
-      - "nlp"
-      - "natural language"
-      - "language model"
       - "llm"
+      - "language model"
       - "gpt"
-      - "transformer"
       - "bert"
-      - "text generation"
-      - "sentiment analysis"
-      - "named entity"
-      - "chatbot"
-      - "conversational ai"
+      - "transformer"
+      - "prompt engineering"
+      - "fine-tuning"
+      - "instruction tuning"
       
   Computer Vision:
     keywords:
@@ -39,45 +21,17 @@ categories:
       - "video analysis"
       - "convolutional"
       - "cnn"
-      - "image processing"
-      - "visual"
+      - "segmentation"
       
-  Data Engineering:
+  MLOps & Model Deployment:
     keywords:
-      - "data pipeline"
-      - "data engineering"
-      - "etl"
-      - "data warehouse"
-      - "data lake"
-      - "apache spark"
-      - "kafka"
-      - "airflow"
-      - "data infrastructure"
-      - "stream processing"
-      - "batch processing"
-      
-  Data Science:
-    keywords:
-      - "data science"
-      - "analytics"
-      - "data analysis"
-      - "statistical"
-      - "predictive model"
-      - "exploratory data"
-      - "visualization"
-      - "jupyter"
-      
-  AI Infrastructure:
-    keywords:
-      - "ai infrastructure"
-      - "gpu"
-      - "distributed training"
+      - "mlops"
+      - "model deployment"
       - "model serving"
-      - "kubernetes"
-      - "container"
-      - "scalability"
-      - "performance optimization"
-      - "cloud"
+      - "ml pipeline"
+      - "model monitoring"
+      - "feature store"
+      - "model registry"
       
   Recommendation Systems:
     keywords:
@@ -87,6 +41,33 @@ categories:
       - "ranking"
       - "collaborative filtering"
       
+  Data Engineering & Infrastructure:
+    keywords:
+      - "data pipeline"
+      - "data engineering"
+      - "etl"
+      - "data warehouse"
+      - "data lake"
+      - "spark"
+      - "kafka"
+      - "airflow"
+      
+  AI Infrastructure & Scaling:
+    keywords:
+      - "gpu"
+      - "distributed training"
+      - "kubernetes"
+      - "scalability"
+      - "inference optimization"
+      
+  Reinforcement Learning:
+    keywords:
+      - "reinforcement learning"
+      - "rl"
+      - "policy"
+      - "reward"
+      - "agent"
+      
   Generative AI:
     keywords:
       - "generative"
@@ -94,9 +75,37 @@ categories:
       - "diffusion"
       - "stable diffusion"
       - "dall-e"
-      - "midjourney"
       - "text-to-image"
-      - "image generation"
       
-  Other:
-    keywords: []  # Default category for uncategorized articles
+  Applied Machine Learning:
+    keywords:
+      - "machine learning"
+      - "ml model"
+      - "training"
+      - "feature engineering"
+      - "supervised learning"
+      
+  AI Safety & Ethics:
+    keywords:
+      - "bias"
+      - "fairness"
+      - "ethics"
+      - "privacy"
+      - "responsible ai"
+      
+  Research & Theory:
+    keywords:
+      - "research"
+      - "novel"
+      - "theoretical"
+      - "algorithm"
+      - "paper"
+      
+  Software Engineering & Systems:
+    keywords:
+      - "architecture"
+      - "microservices"
+      - "backend"
+      - "system design"
+      - "performance"
+
