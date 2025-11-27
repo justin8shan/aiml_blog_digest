@@ -8,6 +8,7 @@ from pathlib import Path
 
 from scraper import BlogScraper
 from categorizer import ArticleCategorizer
+from llm_categorizer import LLMCategorizer
 from email_digest import EmailDigest
 from utils import load_config, get_config_path
 
@@ -18,13 +19,14 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def main(days_back: int = 7, send_email: bool = True):
+def main(days_back: int = 7, send_email: bool = True, use_llm: bool = True):
     """
     Main function to run the blog digest pipeline.
     
     Args:
         days_back: Number of days to look back for articles
         send_email: Whether to send email or just generate digest
+        use_llm: Whether to use LLM for categorization (default: True)
     """
     try:
         logger.info("Starting blog digest generation...")
@@ -32,9 +34,16 @@ def main(days_back: int = 7, send_email: bool = True):
         # Load configurations
         logger.info("Loading configuration files...")
         blogs_config = load_config(get_config_path('blogs.yaml'))
-        categories_config = load_config(get_config_path('categories.yaml'))
         email_config = load_config(get_config_path('email_config.yaml'))
         footer_config = load_config(get_config_path('footer_config.yaml'))
+        
+        # Load appropriate categorization config
+        if use_llm:
+            logger.info("Using LLM-based categorization")
+            categories_config = load_config(get_config_path('llm_categories.yaml'))
+        else:
+            logger.info("Using keyword-based categorization")
+            categories_config = load_config(get_config_path('categories.yaml'))
         
         # Step 1: Fetch articles from blogs
         logger.info(f"Fetching articles from the last {days_back} days...")
@@ -49,7 +58,10 @@ def main(days_back: int = 7, send_email: bool = True):
         
         # Step 2: Categorize articles
         logger.info("Categorizing articles...")
-        categorizer = ArticleCategorizer(categories_config['categories'])
+        if use_llm:
+            categorizer = LLMCategorizer(categories_config)
+        else:
+            categorizer = ArticleCategorizer(categories_config['categories'])
         categorized_articles = categorizer.categorize_articles(articles)
         
         # Step 3: Generate and send email digest
@@ -99,8 +111,17 @@ if __name__ == "__main__":
         action='store_true',
         help='Generate digest without sending email (for testing)'
     )
+    parser.add_argument(
+        '--no-llm',
+        action='store_true',
+        help='Use keyword-based categorization instead of LLM'
+    )
     
     args = parser.parse_args()
     
-    success = main(days_back=args.days, send_email=not args.no_email)
+    success = main(
+        days_back=args.days, 
+        send_email=not args.no_email,
+        use_llm=not args.no_llm
+    )
     exit(0 if success else 1)

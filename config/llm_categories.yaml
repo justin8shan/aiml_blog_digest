@@ -1,0 +1,61 @@
+# Article categorization using LLM
+llm:
+  provider: "github"  # Options: "openrouter", "github"
+  # model: "x-ai/grok-4.1-fast:free"  # Model format depends on provider
+  model: "openai/gpt-4.1-mini"
+  
+  # API configuration by provider
+  api_config:
+    openrouter:
+      base_url: "https://openrouter.ai/api/v1"
+      env_var: "OPENROUTER_API_KEY"
+    github:
+      base_url: "https://models.github.ai/inference"
+      env_var: "GITHUB_TOKEN"
+  
+  # Batch processing settings
+  batch_size: 10  # Process multiple articles in one API call
+  max_tokens: 500  # Maximum tokens per response
+  temperature: 0.3  # Lower temperature for more consistent categorization
+  
+  # Fallback to keyword matching if LLM fails
+  fallback_to_keywords: true
+
+# Categories for LLM to choose from
+categories:
+  - name: "Large Language Models (LLMs)"
+    description: "Articles about GPT, BERT, transformers, prompt engineering, language model training and fine-tuning"
+    
+  - name: "Computer Vision"
+    description: "Image and video processing, object detection, segmentation, image classification, visual recognition"
+    
+  - name: "MLOps & Model Deployment"
+    description: "Model deployment, serving, monitoring, versioning, ML pipelines, CI/CD for ML, model management"
+    
+  - name: "Recommendation Systems"
+    description: "Personalization, ranking algorithms, search relevance, collaborative filtering, content discovery"
+    
+  - name: "Data Engineering & Infrastructure"
+    description: "Data pipelines, ETL, data warehouses, data lakes, streaming platforms, data quality"
+    
+  - name: "AI Infrastructure & Scaling"
+    description: "GPU optimization, distributed training, model serving infrastructure, hardware acceleration, performance optimization"
+    
+  - name: "Reinforcement Learning"
+    description: "RL algorithms, policy optimization, game AI, robotics, autonomous systems"
+    
+  - name: "Generative AI"
+    description: "Text-to-image, image generation, diffusion models, GANs, stable diffusion, DALL-E, creative AI"
+    
+  - name: "Applied Machine Learning"
+    description: "Practical ML applications, feature engineering, model training, hyperparameter tuning, AutoML"
+    
+  - name: "AI Safety & Ethics"
+    description: "Bias and fairness, privacy, responsible AI, interpretability, AI governance, ethical considerations"
+    
+  - name: "Research & Theory"
+    description: "Novel algorithms, academic research, theoretical advances, new architectures, research papers"
+    
+  - name: "Software Engineering & Systems"
+    description: "General software architecture, system design, performance optimization, backend engineering (non-ML focus)"
+
