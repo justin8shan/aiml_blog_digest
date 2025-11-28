@@ -7,7 +7,13 @@ email:
   # Sender email (set via environment variable SENDER_EMAIL)
   # Password (set via environment variable EMAIL_PASSWORD)
   
-  # Recipients
+  # Supabase Configuration (for subscriber management)
+  # Set via environment variables:
+  #   SUPABASE_URL - Your Supabase project URL
+  #   SUPABASE_KEY - Your Supabase API key (service role key recommended)
+  use_database: true  # Set to false to use hardcoded recipients below
+  
+  # Fallback recipients (used when use_database is false or database is unavailable)
   recipients:
     - "xinchao.shan@gmail.com"
     - "sherrysherry@gmail.com" 
