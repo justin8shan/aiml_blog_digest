@@ -265,7 +265,8 @@ class EmailDigest:
         # Create message
         msg = MIMEMultipart('alternative')
         msg['From'] = self.sender_email
-        msg['To'] = ', '.join(recipients)
+        msg['To'] = self.sender_email  # Send to self, use BCC for recipients
+        msg['Bcc'] = ', '.join(recipients)  # BCC hides recipients from each other
         msg['Subject'] = self.subject_template.format(date=week_start)
         
         # Generate digest content
