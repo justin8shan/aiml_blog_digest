@@ -18,3 +18,6 @@ python-dateutil==2.8.2
 
 # LLM APIs for categorization
 openai>=1.12.0  # OpenAI API (optional, for LLM categorization)
+
+# Database
+supabase>=2.8.0  # Supabase client for subscriber management

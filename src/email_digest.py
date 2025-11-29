@@ -9,6 +9,8 @@ from datetime import datetime
 import logging
 import os
 
+from subscriber import Subscriber
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -30,13 +32,35 @@ class EmailDigest:
         self.blogs_config = blogs_config
         self.smtp_server = email_config['email']['smtp_server']
         self.smtp_port = email_config['email']['smtp_port']
-        self.recipients = email_config['email']['recipients']
         self.subject_template = email_config['email']['subject_template']
         self.use_html = email_config['email'].get('use_html', True)
         
         # Get credentials from environment variables
         self.sender_email = os.getenv('SENDER_EMAIL')
         self.email_password = os.getenv('EMAIL_PASSWORD')
+        
+        # Initialize database connection
+        self.db = Subscriber()
+    
+    def get_recipients(self) -> List[str]:
+        """
+        Get list of active subscribers from database.
+        
+        Returns:
+            List of email addresses
+            
+        Raises:
+            RuntimeError: If database is unavailable or no active subscribers found
+        """
+        if not self.db:
+            raise RuntimeError("Subscriber database not initialized")
+        
+        recipients = self.db.get_active_subscribers()
+        if not recipients:
+            raise RuntimeError("No active subscribers found in database")
+        
+        logger.info(f"Retrieved {len(recipients)} active subscribers from database")
+        return recipients
         
     def generate_html_digest(self, categorized_articles: Dict[str, List],
                             week_start: str) -> str:
@@ -229,13 +253,20 @@ class EmailDigest:
             logger.info("Please set SENDER_EMAIL and EMAIL_PASSWORD environment variables")
             return False
         
+        # Get recipients from database or fallback
+        recipients = self.get_recipients()
+        if not recipients:
+            logger.error("No recipients found")
+            return False
+        
         # Calculate week start date
         week_start = datetime.now().strftime("%B %d, %Y")
         
         # Create message
         msg = MIMEMultipart('alternative')
         msg['From'] = self.sender_email
-        msg['To'] = ', '.join(self.recipients)
+        msg['To'] = self.sender_email  # Send to self, use BCC for recipients
+        msg['Bcc'] = ', '.join(recipients)  # BCC hides recipients from each other
         msg['Subject'] = self.subject_template.format(date=week_start)
         
         # Generate digest content
@@ -256,7 +287,7 @@ class EmailDigest:
                 server.login(self.sender_email, self.email_password)
                 server.send_message(msg)
             
-            logger.info(f"Email digest sent successfully to {', '.join(self.recipients)}")
+            logger.info(f"Email digest sent successfully to {len(recipients)} recipients")
             return True
             
         except Exception as e:
