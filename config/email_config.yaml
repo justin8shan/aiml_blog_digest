@@ -11,12 +11,7 @@ email:
   # Set via environment variables:
   #   SUPABASE_URL - Your Supabase project URL
   #   SUPABASE_KEY - Your Supabase API key (service role key recommended)
-  use_database: true  # Set to false to use hardcoded recipients below
-  
-  # Fallback recipients (used when use_database is false or database is unavailable)
-  recipients:
-    - "xinchao.shan@gmail.com"
-    - "sherrysherry@gmail.com" 
+  # If database is unavailable or returns no subscribers, the process will error out 
     
   # Email Subject Template
   subject_template: "Weekly AI/ML Tech Blog Digest - Week of {date}"

@@ -32,35 +32,35 @@ class EmailDigest:
         self.blogs_config = blogs_config
         self.smtp_server = email_config['email']['smtp_server']
         self.smtp_port = email_config['email']['smtp_port']
-        self.fallback_recipients = email_config['email']['recipients']
         self.subject_template = email_config['email']['subject_template']
         self.use_html = email_config['email'].get('use_html', True)
-        self.use_database = email_config['email'].get('use_database', False)
         
         # Get credentials from environment variables
         self.sender_email = os.getenv('SENDER_EMAIL')
         self.email_password = os.getenv('EMAIL_PASSWORD')
         
-        # Initialize database connection if enabled
-        self.db = Subscriber() if self.use_database else None
+        # Initialize database connection
+        self.db = Subscriber()
     
     def get_recipients(self) -> List[str]:
         """
-        Get list of recipients from database or fallback to config.
+        Get list of active subscribers from database.
         
         Returns:
             List of email addresses
+            
+        Raises:
+            RuntimeError: If database is unavailable or no active subscribers found
         """
-        if self.use_database and self.db:
-            recipients = self.db.get_active_subscribers()
-            if recipients:
-                logger.info(f"Using {len(recipients)} recipients from database")
-                return recipients
-            else:
-                logger.warning("No subscribers found in database, using fallback recipients")
+        if not self.db:
+            raise RuntimeError("Subscriber database not initialized")
         
-        logger.info(f"Using {len(self.fallback_recipients)} fallback recipients from config")
-        return self.fallback_recipients
+        recipients = self.db.get_active_subscribers()
+        if not recipients:
+            raise RuntimeError("No active subscribers found in database")
+        
+        logger.info(f"Retrieved {len(recipients)} active subscribers from database")
+        return recipients
         
     def generate_html_digest(self, categorized_articles: Dict[str, List],
                             week_start: str) -> str:
