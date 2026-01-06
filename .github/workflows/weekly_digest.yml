@@ -2,8 +2,8 @@ name: Weekly Blog Digest
 
 on:
   schedule:
-    # Run every Monday at 9:00 AM UTC
-    - cron: '0 9 * * 1'
+    # Run every Monday and Thursday at 9:00 AM UTC
+    - cron: '0 9 * * 1,4'
   workflow_dispatch:  # Allow manual triggering
 
 jobs:
@@ -42,7 +42,7 @@ jobs:
         SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
       run: |
         cd src
-        python main.py --days 7
+        python main.py --days 3
         
     - name: Upload logs (on failure)
       if: failure()
